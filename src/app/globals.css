@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --thm-font: 'Nunito', sans-serif;
+    --thm-reey-font: 'reeyregular', cursive;
+    --thm-gray: #707876;
+    --thm-gray-rgb: 112, 120, 118;
+    --thm-primary: #15c8a0; /* Original Halpes Green - User Logo might differ, but Halpes default is this */
+    --thm-primary-rgb: 21, 200, 160;
+    --thm-black: #1f2230;
+    --thm-black-rgb: 31, 34, 48;
+    --thm-base: #15c8a0;
+    --thm-border: #e5eeec;
+}
+
+/* NMM Specific Overrides - If logo is Cyan, we use Cyan */
+:root {
+    --thm-primary: #06b6d4; 
+    --thm-primary-rgb: 6, 182, 212;
+}
+
+body {
+    font-family: var(--thm-font);
+    color: var(--thm-gray);
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 700;
+    overflow-x: hidden;
+}
+
+@layer components {
+    .container {
+        @apply max-w-[1200px] mx-auto px-[15px] sm:px-[20px] md:px-[30px];
+    }
+
+    .thm-btn {
+        @apply inline-block align-middle no-underline bg-cyan-500 text-white text-sm md:text-base font-black py-[12px] px-[30px] md:py-[18.5px] md:px-[50px] transition-all duration-500 hover:bg-[#1f2230] hover:text-white cursor-pointer;
+    }
+
+    .section-title {
+        @apply mt-[-13px] mb-[30px] md:mb-[50px];
+    }
+
+    .section-title__tagline {
+        @apply inline-flex items-center text-cyan-500 text-[16px] md:text-[18px] font-black leading-[26px] md:leading-[30px];
+    }
+
+    .section-title__tagline::before {
+        content: '';
+        @apply bg-current w-[30px] md:w-[44px] h-[2px] mr-[10px];
+    }
+
+    .section-title__title {
+        @apply m-0 font-black text-[#1f2230] text-[32px] md:text-[50px] leading-[40px] md:leading-[62px];
+    }
+
+    /* Page Header */
+    .page-header {
+        @apply relative block py-[60px] md:py-[100px] bg-[#eff5f4];
+    }
+
+    .page-header-bg {
+        @apply absolute top-0 left-0 right-0 bottom-0 bg-no-repeat bg-cover bg-center grayscale opacity-20;
+    }
+
+    .page-header__inner {
+        @apply relative block text-center;
+    }
+
+    .page-header__inner h2 {
+        @apply m-0 text-[#1f2230] text-[40px] md:text-[60px] font-black leading-[50px] md:leading-[70px];
+    }
+
+    .thm-breadcrumb {
+        @apply flex justify-center items-center mt-[10px] p-0 list-none flex-wrap;
+    }
+
+    .thm-breadcrumb li {
+        @apply flex items-center text-[16px] md:text-[18px] font-black text-[#1f2230];
+    }
+
+    .thm-breadcrumb li a {
+        @apply text-gray-400 transition-all hover:text-cyan-500;
+    }
+
+    .thm-breadcrumb li span {
+        @apply mx-[10px] text-gray-300;
+    }
+
+    /* News Two Styling */
+    .news-two__single {
+        @apply relative block mb-[30px] border border-[#e5eeec] bg-white transition-all duration-500;
+    }
+
+    .news-two__single:hover {
+        @apply shadow-[0px_10px_60px_0px_rgba(0,0,0,0.07)];
+    }
+
+    .news-two__img-box { @apply relative block overflow-hidden; }
+    .news-two__img img { @apply w-full transition-transform duration-500; }
+    .news-two__single:hover .news-two__img img { @apply scale-105; }
+
+    .news-two__date {
+        @apply absolute bottom-[-10px] right-[20px] bg-cyan-500 py-[4px] px-[20px] z-[2];
+    }
+
+    .news-two__date p { @apply m-0 text-white text-[14px] font-black; }
+
+    .news-two__content {
+        @apply relative block p-[30px_40px_30px];
+    }
+
+    .news-two__meta { @apply flex items-center mb-[15px]; }
+    .news-two__meta li { @apply flex items-center text-[14px] font-black text-gray-400 mr-[15px]; }
+    .news-two__meta li i { @apply text-cyan-500 mr-[5px]; }
+
+    .news-two__title { @apply text-[26px] font-black leading-[36px] mb-[11px]; }
+    .news-two__title a { @apply text-[#1f2230] hover:text-cyan-500 transition-colors; }
+
+    /* Events One Styling */
+    .events-one__single { @apply relative block overflow-hidden; }
+    .events-one__img { @apply relative block; }
+    .events-one__date-box {
+        @apply absolute top-0 left-[30px] h-[70px] w-[70px] bg-cyan-500 flex items-center justify-center text-center p-[10px];
+    }
+    .events-one__date-box p { @apply m-0 text-white text-[16px] font-black leading-[20px]; }
+
+    .events-one__bottom {
+        @apply absolute bottom-[21px] left-[30px];
+    }
+    .events-one__bottom p { @apply m-0 text-white text-[14px] font-black mb-[5px]; }
+    .events-one__bottom-title { @apply text-[22px] font-black text-white leading-[32px]; }
+
+    /* Forms */
+    .nmm-input { @apply relative block mb-[20px]; }
+    .nmm-input input, .nmm-input textarea, .nmm-input select {
+        @apply w-full bg-[#eff5f4] border-none outline-none h-[60px] px-[30px] text-[16px] font-bold text-[#1f2230] rounded-none focus:ring-2 focus:ring-cyan-500;
+    }
+    .nmm-input textarea { @apply h-[160px] py-[20px]; }
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from { transform: translate3d(0, 100%, 0); visibility: visible; }
+    to { transform: translate3d(0, 0, 0); }
+}
+
+.animate-slideInUp { animation-name: slideInUp; }
