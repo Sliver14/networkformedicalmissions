@@ -5,10 +5,16 @@ import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function GalleryPage() {
-  const galleryItems = await prisma.gallery.findMany({
-    where: { isActive: true },
-    orderBy: { createdAt: "desc" }
-  });
+  let galleryItems: any[] = [];
+
+  try {
+    galleryItems = await prisma.gallery.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (error) {
+    console.warn("Database connection failed, using fallback empty data:", error);
+  }
 
   const displayItems = galleryItems.length > 0 ? galleryItems : [
     { title: "Medical Outreach 1", imagePath: "/1.jpeg" },

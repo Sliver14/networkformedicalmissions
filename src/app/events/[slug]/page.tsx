@@ -10,9 +10,15 @@ interface Props {
 }
 
 export default async function EventDetail({ params }: Props) {
-  const event = await prisma.event.findUnique({
-    where: { slug: params.slug }
-  });
+  let event = null;
+
+  try {
+    event = await prisma.event.findUnique({
+      where: { slug: params.slug }
+    });
+  } catch (error) {
+    console.warn("Database connection failed when fetching event item:", error);
+  }
 
   if (!event) {
     notFound();

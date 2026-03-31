@@ -7,10 +7,16 @@ import { Clock, MapPin, ArrowRight } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function EventsIndex() {
-  const events = await prisma.event.findMany({
-    where: { isActive: true },
-    orderBy: { startDate: "asc" }
-  });
+  let events: any[] = [];
+
+  try {
+    events = await prisma.event.findMany({
+      where: { isActive: true },
+      orderBy: { startDate: "asc" },
+    });
+  } catch (error) {
+    console.warn("Database connection failed, using fallback empty data:", error);
+  }
 
   return (
     <div className="flex flex-col w-full">

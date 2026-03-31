@@ -8,15 +8,22 @@ import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 const AboutPage = async () => {
-  const values = await prisma.value.findMany({
-    where: { isActive: true },
-    orderBy: { createdAt: "asc" }
-  });
+  let values: any[] = [];
+  let faqs: any[] = [];
 
-  const faqs = await prisma.faq.findMany({
-    where: { isActive: true },
-    orderBy: { createdAt: "asc" }
-  });
+  try {
+    values = await prisma.value.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: "asc" }
+    });
+
+    faqs = await prisma.faq.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: "asc" }
+    });
+  } catch (error) {
+    console.warn("Database connection failed, using fallback empty data:", error);
+  }
 
   // Fallback data if DB is empty
   const displayValues = values.length > 0 ? values : [

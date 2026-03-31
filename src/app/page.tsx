@@ -6,22 +6,29 @@ import HeroSlider from "@/components/HeroSlider";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const upcomingEvents = await prisma.event.findMany({
-    where: { isActive: true },
-    orderBy: { startDate: "asc" },
-    take: 3,
-  });
+  let upcomingEvents: any[] = [];
+  let latestNews: any[] = [];
 
-  const latestNews = await prisma.news.findMany({
-    where: { isPublished: true },
-    orderBy: { publishedAt: "desc" },
-    take: 3,
-    include: {
-      _count: {
-        select: { comments: { where: { isApproved: true } } }
+  try {
+    upcomingEvents = await prisma.event.findMany({
+      where: { isActive: true },
+      orderBy: { startDate: "asc" },
+      take: 3,
+    });
+
+    latestNews = await prisma.news.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+      include: {
+        _count: {
+          select: { comments: { where: { isApproved: true } } }
+        }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.warn("Database connection failed, using fallback empty data:", error);
+  }
 
   return (
     <div className="flex flex-col w-full">

@@ -7,15 +7,21 @@ import { Eye, Heart, MessageSquare, ArrowRight } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function NewsIndex() {
-  const news = await prisma.news.findMany({
-    where: { isPublished: true },
-    orderBy: { publishedAt: "desc" },
-    include: {
-      _count: {
-        select: { comments: { where: { isApproved: true } } }
+  let news: any[] = [];
+
+  try {
+    news = await prisma.news.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: "desc" },
+      include: {
+        _count: {
+          select: { comments: { where: { isApproved: true } } }
+        }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.warn("Database connection failed, using fallback empty data:", error);
+  }
 
   return (
     <div className="flex flex-col w-full">

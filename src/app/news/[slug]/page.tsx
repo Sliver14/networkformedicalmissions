@@ -11,15 +11,21 @@ interface Props {
 }
 
 export default async function NewsDetail({ params }: Props) {
-  const newsItem = await prisma.news.findUnique({
-    where: { slug: params.slug },
-    include: {
-      comments: {
-        where: { isApproved: true },
-        orderBy: { createdAt: "asc" }
+  let newsItem = null;
+
+  try {
+    newsItem = await prisma.news.findUnique({
+      where: { slug: params.slug },
+      include: {
+        comments: {
+          where: { isApproved: true },
+          orderBy: { createdAt: "desc" }
+        }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.warn("Database connection failed when fetching news item:", error);
+  }
 
   if (!newsItem) {
     notFound();
