@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -22,9 +22,24 @@ const reey = localFont({
   variable: '--font-reey'
 });
 
+export const viewport: Viewport = {
+  themeColor: "#06b6d4",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "Network for Medical Missions",
   description: "Network for Medical Missions - Providing medical, relief and community support services.",
+  icons: {
+    icon: [
+      { url: "/assets/images/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/images/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/assets/images/favicons/favicon.ico",
+    apple: "/assets/images/favicons/apple-touch-icon.png",
+  },
+  manifest: "/assets/images/favicons/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -38,9 +53,9 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
       </head>
       <body className={`${nunito.variable} ${reey.variable} font-sans antialiased`}>
-        <div className="page-wrapper">
+        <div className="page-wrapper flex flex-col min-h-screen">
           <Header />
-          <main>{children}</main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </div>
       </body>
