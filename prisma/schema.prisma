@@ -16,6 +16,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   password      String?
+  role          String    @default("USER")
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -61,10 +62,11 @@ model VerificationToken {
 }
 
 model Newsletter {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  isSubscribed Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Membership {
