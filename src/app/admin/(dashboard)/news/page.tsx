@@ -13,7 +13,7 @@ export default async function AdminNewsPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">News & Posts</h2>
+        <h2 className="text-2xl font-bold text-gray-800">News</h2>
         <Link
           href="/admin/news/new"
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
