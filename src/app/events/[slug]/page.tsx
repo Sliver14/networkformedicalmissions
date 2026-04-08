@@ -42,9 +42,9 @@ export default async function EventDetail({ params }: Props) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             {/* Featured Image(s) */}
-            <div className={`grid gap-4 ${images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+            <div className={`grid gap-4 ${images.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
               {images.map((img, idx) => (
-                <div key={idx} className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
+                <div key={idx} className="relative h-[250px] sm:h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
                   <Image 
                     src={img} 
                     alt={`${event.title} - Image ${idx + 1}`} 
