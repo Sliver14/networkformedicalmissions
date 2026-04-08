@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
-import { Newspaper, Mail, Users, Calendar, DollarSign, BadgeCheck } from "lucide-react";
+import { Newspaper, Mail, Users, Calendar, DollarSign, BadgeCheck, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
 
@@ -96,13 +97,21 @@ export default async function AdminDashboard() {
               <span className="text-gray-600 font-medium">Associate Members</span>
               <span className="font-bold text-gray-900">{membershipCounts["Associate"] || 0}</span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center border-b border-gray-50 pb-2">
               <span className="text-gray-600 font-medium">Honorary Members</span>
               <span className="font-bold text-gray-900">{membershipCounts["Honorary"] || 0}</span>
             </div>
           </div>
+          <Link 
+            href="/admin/memberships"
+            className="mt-6 flex items-center justify-center space-x-2 w-full py-2 bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 transition-colors font-semibold text-sm"
+          >
+            <span>View All Members</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </div>
   );
 }
+
