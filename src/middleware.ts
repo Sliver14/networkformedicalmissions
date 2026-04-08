@@ -6,29 +6,23 @@ export default withAuth(
     const token = req.nextauth.token;
     const isLoginPage = req.nextUrl.pathname === "/admin/login";
 
-    // If already logged in and trying to access login page, redirect to admin dashboard
-    if (isLoginPage && token) {
-      return NextResponse.redirect(new URL("/admin", req.url));
-    }
-
-    // If the user is accessing an admin route and is not an ADMIN, redirect them
-    // (excluding login page which is already handled by authorized callback)
+    // If accessing any admin route (except login) and role is not ADMIN, redirect to home
     if (
       req.nextUrl.pathname.startsWith("/admin") &&
       !isLoginPage &&
       token?.role !== "ADMIN"
     ) {
-      return NextResponse.redirect(new URL("/", req.url)); // Redirect non-admins to home
+      return NextResponse.redirect(new URL("/", req.url));
     }
   },
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // If it's the login page, allow access
+        // Always allow access to the login page
         if (req.nextUrl.pathname === "/admin/login") {
           return true;
         }
-        // For other admin pages, require token
+        // Require a token for all other matched routes
         return !!token;
       },
     },
