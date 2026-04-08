@@ -7,8 +7,11 @@ import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { News } from "@prisma/client";
 
+import ImageUpload from "@/components/admin/ImageUpload";
+
 export default function EditPostForm({ post }: { post: News }) {
   const [content, setContent] = useState(post.content);
+  const [image, setImage] = useState(post.image || "");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,6 +20,7 @@ export default function EditPostForm({ post }: { post: News }) {
     
     const formData = new FormData(e.currentTarget);
     formData.set("content", content);
+    formData.set("image", image);
     
     try {
       await updateNews(post.id, formData);
@@ -54,14 +58,9 @@ export default function EditPostForm({ post }: { post: News }) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Cover Image URL (Optional)
+            Cover Image
           </label>
-          <input
-            type="url"
-            name="image"
-            defaultValue={post.image || ""}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
-          />
+          <ImageUpload value={image} onChange={setImage} />
         </div>
 
         <div className="flex items-center">

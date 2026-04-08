@@ -3,12 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { subscribeNewsletter } from "@/app/actions/newsletter";
 import { ArrowRight, Phone, Mail, Twitter, Facebook, Instagram } from "lucide-react";
 
 const Footer = () => {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error", text: string } | null>(null);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

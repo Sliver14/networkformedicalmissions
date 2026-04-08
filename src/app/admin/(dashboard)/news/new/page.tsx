@@ -6,8 +6,11 @@ import RichTextEditor from "@/components/admin/RichTextEditor";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+import ImageUpload from "@/components/admin/ImageUpload";
+
 export default function NewPostPage() {
   const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,6 +19,7 @@ export default function NewPostPage() {
     
     const formData = new FormData(e.currentTarget);
     formData.set("content", content);
+    formData.set("image", image);
     
     try {
       await createNews(formData);
@@ -53,15 +57,9 @@ export default function NewPostPage() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Cover Image URL (Optional)
+            Cover Image
           </label>
-          <input
-            type="url"
-            name="image"
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
-            placeholder="https://example.com/image.jpg"
-          />
-          <p className="text-xs text-gray-500 mt-1">Upload to a service like Cloudinary or use a public URL.</p>
+          <ImageUpload value={image} onChange={setImage} />
         </div>
 
         <div className="flex items-center">

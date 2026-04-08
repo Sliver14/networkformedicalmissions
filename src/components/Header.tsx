@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Mail, Facebook, Twitter, Instagram, Heart } from "lucide-react";
 
 const Header = () => {
+  const pathname = usePathname();
   const [isSticky, setIsSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
@@ -17,6 +19,10 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const toggleMobileMenu = (menuName: string) => {
     setExpandedMenu(expandedMenu === menuName ? null : menuName);
