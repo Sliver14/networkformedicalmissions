@@ -136,7 +136,7 @@ export default async function Home() {
       </section>
 
       {/* Latest News Section */}
-      <section className="news-two relative py-[150px_0_70px] mt-[-50px]">
+      <section className="news-two relative py-[150px] lg:py-[200px_0_70px] mt-0 lg:mt-[50px]">
         <div className="news-two-bg absolute inset-0 -z-10 bg-no-repeat bg-cover grayscale" style={{ backgroundImage: "url('/assets/images/backgrounds/news-two-bg.jpg')" }}>
           <div className="absolute inset-0 bg-[#1f2230] opacity-90"></div>
         </div>
