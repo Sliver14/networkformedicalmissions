@@ -27,7 +27,7 @@ export default function AdminLayoutShell({
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <AdminSidebar />
+        <AdminSidebar onNavClick={() => setIsSidebarOpen(false)} />
       </div>
 
       {/* Main Content Area */}

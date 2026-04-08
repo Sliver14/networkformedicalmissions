@@ -13,7 +13,7 @@ const navItems = [
   { name: "Newsletter", href: "/admin/newsletter", icon: Mail },
 ];
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname();
 
   return (
@@ -32,6 +32,7 @@ export default function AdminSidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={onNavClick}
               className={clsx(
                 "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors",
                 isActive 

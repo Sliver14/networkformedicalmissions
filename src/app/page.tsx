@@ -116,8 +116,10 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
             {upcomingEvents.map((event) => (
               <div key={event.id} className="events-one__single group">
-                <div className="events-one__img">
-                  <Image src={(event.image ? event.image.split(',')[0].trim() : null) || "/assets/images/resources/events-one-img-1.jpg"} alt={event.title} width={400} height={300} className="w-full object-cover" unoptimized />
+                <div className="events-one__img relative h-full w-full">
+                  <Link href={`/events/${event.slug}`} className="block relative w-full h-[300px]">
+                    <Image src={(event.image ? event.image.split(',')[0].trim() : null) || "/assets/images/resources/events-one-img-1.jpg"} alt={event.title} fill className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" unoptimized />
+                  </Link>
                   <div className="events-one__date-box">
                     <p>{event.startDate ? new Date(event.startDate).getDate() : "00"} <br /> {event.startDate ? new Date(event.startDate).toLocaleString('default', { month: 'short' }) : "Mon"}</p>
                   </div>
