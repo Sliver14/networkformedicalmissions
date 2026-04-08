@@ -60,7 +60,7 @@ export default async function NewsIndex() {
                     </h3>
                     
                     <p className="text-gray-600 line-clamp-3 flex-grow">
-                      {item.content.replace(/<[^>]*>?/gm, '').substring(0, 120)}...
+                      {item.content.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ').substring(0, 120)}...
                     </p>
                     
                     <Link href={`/news/${item.slug}`} className="inline-flex items-center bg-cyan-500 text-white px-6 py-3 rounded-xl font-black hover:bg-cyan-600 transition-all self-start">

@@ -68,11 +68,10 @@ export default async function EventDetail({ params }: Props) {
                 {event.title}
               </h1>
 
-              <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-6">
-                {event.description.split('\n').map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
+              <div 
+                className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-6"
+                dangerouslySetInnerHTML={{ __html: event.description }}
+              />
 
               {/* Action Area */}
               <div className="mt-12 pt-12 border-t border-gray-100 space-y-6">

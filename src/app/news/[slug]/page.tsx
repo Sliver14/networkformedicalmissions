@@ -71,11 +71,10 @@ export default async function NewsDetail({ params }: Props) {
                 {newsItem.title}
               </h1>
 
-              <div className="prose prose-base md:prose-lg max-w-none text-gray-600 leading-relaxed space-y-4 md:space-y-6">
-                {newsItem.content.split('\n').map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
+              <div 
+                className="prose prose-base md:prose-lg max-w-none text-gray-600 leading-relaxed space-y-4 md:space-y-6"
+                dangerouslySetInnerHTML={{ __html: newsItem.content }}
+              />
 
               {/* Client Interactions (Likes & Comments) */}
               <NewsDetailClient 
