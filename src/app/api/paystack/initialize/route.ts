@@ -13,7 +13,8 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         email,
-        amount: amount * 100, // Paystack expects amount in kobo
+        amount: amount * 100, // Paystack expects amount in cents for USD
+        currency: 'USD',
         metadata,
         callback_url: `${process.env.NEXT_PUBLIC_APP_URL}/api/paystack/verify`,
       }),

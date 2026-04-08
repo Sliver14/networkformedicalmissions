@@ -102,9 +102,9 @@ const SupportPage = () => {
                   
                   <input 
                     type="number" 
-                    placeholder="Amount (NGN)" 
+                    placeholder="Amount (USD)" 
                     required 
-                    min="100"
+                    min="1"
                     value={formData.amount}
                     onChange={(e) => setFormData({...formData, amount: e.target.value})}
                     className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"

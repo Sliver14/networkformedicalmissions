@@ -23,7 +23,7 @@ const AssociateMembershipPage = () => {
         method: "POST",
         body: JSON.stringify({
           email: formData.email,
-          amount: 50000,
+          amount: 50,
           metadata: {
             name: formData.name,
             phone: formData.phone,
@@ -124,7 +124,7 @@ const AssociateMembershipPage = () => {
                   ></textarea>
                   
                   <div className="pt-4 border-t border-gray-100">
-                    <p className="text-gray-500 mb-6 font-bold">Amount Due: <span className="text-cyan-500 text-2xl ml-2">NGN 50,000.00</span> <span className="text-xs uppercase ml-1">(Annual)</span></p>
+                    <p className="text-gray-500 mb-6 font-bold">Amount Due: <span className="text-cyan-500 text-2xl ml-2">USD 50.00</span> <span className="text-xs uppercase ml-1">(Annual)</span></p>
                     <button 
                       type="submit" 
                       disabled={loading}
