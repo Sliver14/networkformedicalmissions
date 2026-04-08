@@ -98,7 +98,7 @@ const Footer = () => {
                   name="email"
                   placeholder="Email address" 
                   required
-                  className="w-full bg-gray-800 border-none py-3 md:py-4 px-4 md:px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 text-white outline-none transition-all placeholder:text-gray-500 text-sm md:text-base"
+                  className="w-full bg-gray-800 border-none py-3 md:py-4 pl-4 md:pl-6 pr-12 md:pr-16 rounded-xl focus:ring-2 focus:ring-cyan-500 text-white outline-none transition-all placeholder:text-gray-500 text-sm md:text-base"
                 />
                 <button 
                   disabled={loading}
