@@ -4,7 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Calendar, Eye } from "lucide-react";
 import NewsDetailClient from "@/components/NewsDetailClient";
-import { incrementViews } from "@/app/actions/news";
+
+export const dynamic = 'force-dynamic';
 
 interface Props {
   params: { slug: string };
