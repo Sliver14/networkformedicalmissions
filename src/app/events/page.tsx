@@ -32,10 +32,10 @@ export default async function EventsIndex() {
               events.map((event) => (
                 <div key={event.id} className="group relative rounded-3xl overflow-hidden shadow-xl h-[450px] transition-all hover:scale-[1.02] duration-300">
                   <Image 
-                    src={event.image || "/assets/images/resources/events-one-img-1.jpg"} 
+                    src={(event.image ? event.image.split(',')[0] : null) || "/assets/images/resources/events-one-img-1.jpg"} 
                     alt={event.title} 
                     fill 
-                    className="object-cover transition-transform duration-500 group-hover:scale-110" 
+                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent opacity-90"></div>
                   

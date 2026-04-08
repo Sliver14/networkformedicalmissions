@@ -117,7 +117,7 @@ export default async function Home() {
             {upcomingEvents.map((event) => (
               <div key={event.id} className="events-one__single group">
                 <div className="events-one__img">
-                  <Image src={event.image || "/assets/images/resources/events-one-img-1.jpg"} alt={event.title} width={400} height={300} className="w-full object-cover" />
+                  <Image src={(event.image ? event.image.split(',')[0] : null) || "/assets/images/resources/events-one-img-1.jpg"} alt={event.title} width={400} height={300} className="w-full object-cover" />
                   <div className="events-one__date-box">
                     <p>{event.startDate ? new Date(event.startDate).getDate() : "00"} <br /> {event.startDate ? new Date(event.startDate).toLocaleString('default', { month: 'short' }) : "Mon"}</p>
                   </div>
@@ -150,7 +150,7 @@ export default async function Home() {
               <div key={news.id} className="news-two__single group">
                 <div className="news-two__img-box">
                   <div className="news-two__img relative">
-                    <Image src={news.image || "/31.jpeg"} alt={news.title} width={400} height={250} className="w-full h-[250px] object-cover" />
+                    <Image src={(news.image ? news.image.split(',')[0] : null) || "/31.jpeg"} alt={news.title} width={400} height={250} className="w-full h-[250px] object-cover" />
                     <Link href={`/news/${news.slug}`} className="absolute inset-0 bg-cyan-500/90 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center text-white text-[26px]">
                       <i className="fas fa-link"></i>
                     </Link>

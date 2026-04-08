@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { createEvent } from "@/app/actions/admin-events";
 import RichTextEditor from "@/components/admin/RichTextEditor";
-import ImageUpload from "@/components/admin/ImageUpload";
+import MultiImageUpload from "@/components/admin/MultiImageUpload";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -105,9 +105,9 @@ export default function NewEventPage() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Event Image
+            Event Images
           </label>
-          <ImageUpload value={image} onChange={setImage} />
+          <MultiImageUpload value={image} onChange={setImage} />
         </div>
 
         <div>

@@ -34,14 +34,18 @@ export default async function EventDetail({ params }: Props) {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
-            {/* Featured Image */}
-            <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image 
-                src={event.image || "/assets/images/resources/events-one-img-1.jpg"} 
-                alt={event.title} 
-                fill 
-                className="object-cover" 
-              />
+            {/* Featured Image(s) */}
+            <div className={`grid gap-4 ${event.image && event.image.split(',').length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {(event.image ? event.image.split(',') : ["/assets/images/resources/events-one-img-1.jpg"]).map((img, idx) => (
+                <div key={idx} className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image 
+                    src={img} 
+                    alt={`${event.title} - Image ${idx + 1}`} 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Content Section */}

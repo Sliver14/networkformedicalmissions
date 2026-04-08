@@ -6,7 +6,7 @@ import RichTextEditor from "@/components/admin/RichTextEditor";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-import ImageUpload from "@/components/admin/ImageUpload";
+import MultiImageUpload from "@/components/admin/MultiImageUpload";
 
 export default function NewPostPage() {
   const [content, setContent] = useState("");
@@ -59,7 +59,7 @@ export default function NewPostPage() {
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Cover Image
           </label>
-          <ImageUpload value={image} onChange={setImage} />
+          <MultiImageUpload value={image} onChange={setImage} />
         </div>
 
         <div className="flex items-center">

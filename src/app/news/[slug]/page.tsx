@@ -44,14 +44,18 @@ export default async function NewsDetail({ params }: Props) {
       <section className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
-            {/* Featured Image */}
-            <div className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
-              <Image 
-                src={newsItem.image || "/31.jpeg"} 
-                alt={newsItem.title} 
-                fill 
-                className="object-cover" 
-              />
+            {/* Featured Image(s) */}
+            <div className={`grid gap-4 ${newsItem.image && newsItem.image.split(',').length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {(newsItem.image ? newsItem.image.split(',') : ["/31.jpeg"]).map((img, idx) => (
+                <div key={idx} className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image 
+                    src={img} 
+                    alt={`${newsItem.title} - Image ${idx + 1}`} 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Content Section */}

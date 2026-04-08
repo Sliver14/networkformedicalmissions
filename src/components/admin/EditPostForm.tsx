@@ -7,7 +7,7 @@ import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { News } from "@prisma/client";
 
-import ImageUpload from "@/components/admin/ImageUpload";
+import MultiImageUpload from "@/components/admin/MultiImageUpload";
 
 export default function EditPostForm({ post }: { post: News }) {
   const [content, setContent] = useState(post.content);
@@ -58,9 +58,9 @@ export default function EditPostForm({ post }: { post: News }) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Cover Image
+            Cover Images
           </label>
-          <ImageUpload value={image} onChange={setImage} />
+          <MultiImageUpload value={image} onChange={setImage} />
         </div>
 
         <div className="flex items-center">
