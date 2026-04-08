@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart, MessageSquare, ArrowRight } from "lucide-react";
-import { likeNews, postComment } from "@/app/actions/news";
+import { likeNews, postComment, incrementViews } from "@/app/actions/news";
 
 interface Comment {
   id: number;
@@ -24,6 +24,11 @@ const NewsDetailClient = ({ newsId, initialLikes, comments }: NewsDetailClientPr
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error", text: string } | null>(null);
 
+  useEffect(() => {
+    // Record view count once component mounts (handled via cookies in server action)
+    incrementViews(newsId);
+  }, [newsId]);
+
   const handleLike = async () => {
     if (hasLiked || isLiking) return;
     setIsLiking(true);
@@ -31,6 +36,8 @@ const NewsDetailClient = ({ newsId, initialLikes, comments }: NewsDetailClientPr
     if (result.success) {
       setLikes(result.likes!);
       setHasLiked(true);
+    } else if (result.message === "Already liked") {
+      setHasLiked(true); // Update local state so the button reflects they already liked it
     }
     setIsLiking(false);
   };

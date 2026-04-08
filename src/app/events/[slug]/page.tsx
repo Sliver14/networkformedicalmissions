@@ -24,6 +24,11 @@ export default async function EventDetail({ params }: Props) {
     notFound();
   }
 
+  // Safely parse multiple images
+  const images = event.image 
+    ? event.image.split(',').map(img => img.trim()).filter(Boolean) 
+    : ["/assets/images/resources/events-one-img-1.jpg"];
+
   return (
     <div className="flex flex-col w-full">
       <PageHeader 
@@ -35,8 +40,8 @@ export default async function EventDetail({ params }: Props) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             {/* Featured Image(s) */}
-            <div className={`grid gap-4 ${event.image && event.image.split(',').length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {(event.image ? event.image.split(',') : ["/assets/images/resources/events-one-img-1.jpg"]).map((img, idx) => (
+            <div className={`grid gap-4 ${images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {images.map((img, idx) => (
                 <div key={idx} className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
                   <Image 
                     src={img} 

@@ -31,8 +31,10 @@ export default async function NewsDetail({ params }: Props) {
     notFound();
   }
 
-  // Background increment views
-  incrementViews(newsItem.id);
+  // Safely parse multiple images
+  const images = newsItem.image 
+    ? newsItem.image.split(',').map(img => img.trim()).filter(Boolean) 
+    : ["/31.jpeg"];
 
   return (
     <div className="flex flex-col w-full">
@@ -45,8 +47,8 @@ export default async function NewsDetail({ params }: Props) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
             {/* Featured Image(s) */}
-            <div className={`grid gap-4 ${newsItem.image && newsItem.image.split(',').length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {(newsItem.image ? newsItem.image.split(',') : ["/31.jpeg"]).map((img, idx) => (
+            <div className={`grid gap-4 ${images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {images.map((img, idx) => (
                 <div key={idx} className="relative h-[300px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl">
                   <Image 
                     src={img} 

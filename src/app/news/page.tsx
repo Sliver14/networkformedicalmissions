@@ -38,7 +38,7 @@ export default async function NewsIndex() {
                 <div key={item.id} className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col group transition-all hover:shadow-2xl">
                   <div className="relative h-64 overflow-hidden">
                     <Image 
-                      src={(item.image ? item.image.split(',')[0] : null) || "/31.jpeg"} 
+                      src={(item.image ? item.image.split(',')[0].trim() : null) || "/31.jpeg"} 
                       alt={item.title} 
                       fill 
                       className="object-cover transition-transform duration-500 group-hover:scale-110" 

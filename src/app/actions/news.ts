@@ -2,15 +2,28 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export async function likeNews(newsId: number) {
   try {
+    const cookieStore = cookies();
+    const cookieName = `liked_news_${newsId}`;
+
+    // If the user has already liked this post (cookie exists), reject the action
+    if (cookieStore.has(cookieName)) {
+       const newsItem = await prisma.news.findUnique({ where: { id: newsId } });
+       return { success: false, message: "Already liked", likes: Number(newsItem?.likes || 0) };
+    }
+
     const newsItem = await prisma.news.update({
       where: { id: newsId },
       data: {
         likes: { increment: 1 },
       },
     });
+
+    // Set a permanent cookie (e.g., lasts for 10 years) to remember they liked it
+    cookieStore.set(cookieName, 'true', { maxAge: 60 * 60 * 24 * 365 * 10 });
 
     revalidatePath(`/news/${newsItem.slug}`);
     revalidatePath("/news");
@@ -58,12 +71,19 @@ export async function postComment(newsId: number, formData: FormData) {
 
 export async function incrementViews(newsId: number) {
   try {
-    await prisma.news.update({
-      where: { id: newsId },
-      data: {
-        views: { increment: 1 },
-      },
-    });
+    const cookieStore = cookies();
+    const cookieName = `viewed_news_${newsId}`;
+
+    if (!cookieStore.has(cookieName)) {
+      await prisma.news.update({
+        where: { id: newsId },
+        data: {
+          views: { increment: 1 },
+        },
+      });
+      // Set cookie to prevent multiple view counts from same session for 24 hours
+      cookieStore.set(cookieName, 'true', { maxAge: 60 * 60 * 24 });
+    }
   } catch (error) {
     console.error("Error incrementing views:", error);
   }
