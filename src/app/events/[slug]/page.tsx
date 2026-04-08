@@ -50,6 +50,7 @@ export default async function EventDetail({ params }: Props) {
                     alt={`${event.title} - Image ${idx + 1}`} 
                     fill 
                     className="object-cover" 
+                    unoptimized
                   />
                 </div>
               ))}

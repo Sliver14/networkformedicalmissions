@@ -42,6 +42,7 @@ export default async function NewsIndex() {
                       alt={item.title} 
                       fill 
                       className="object-cover transition-transform duration-500 group-hover:scale-110" 
+                      unoptimized
                     />
                     <div className="absolute top-4 left-4 bg-cyan-500 text-white px-3 py-1 rounded font-bold text-xs">
                       {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : "Recently"}

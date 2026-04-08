@@ -56,6 +56,7 @@ export default async function NewsDetail({ params }: Props) {
                     alt={`${newsItem.title} - Image ${idx + 1}`} 
                     fill 
                     className="object-cover" 
+                    unoptimized
                   />
                 </div>
               ))}
