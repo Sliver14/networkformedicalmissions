@@ -4,21 +4,32 @@ import { NextResponse } from "next/server";
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
+    const isLoginPage = req.nextUrl.pathname === "/admin/login";
 
-    // This function only runs for routes that match the config below.
-    // If we reach here, we know it's an /admin route that IS NOT /admin/login.
-    if (token?.role !== "ADMIN") {
+    // If it's NOT the login page and the user doesn't have ADMIN role, redirect to home
+    if (!isLoginPage && token?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", req.url));
     }
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token, req }) => {
+        // Always allow access to the login page
+        if (req.nextUrl.pathname === "/admin/login") {
+          return true;
+        }
+        // Require a token for all other matched routes
+        return !!token;
+      },
+    },
+    // Explicitly define the sign-in page for the middleware
+    pages: {
+      signIn: "/admin/login",
     },
   }
 );
 
 export const config = {
-  // Use a negative lookahead to exclude /admin/login from the middleware
-  matcher: ["/admin/((?!login).*)"],
+  // Match all /admin routes, including the base /admin
+  matcher: ["/admin", "/admin/:path*"],
 };
