@@ -148,13 +148,12 @@ const Header = () => {
         
         {/* Menu Content */}
         <div className={`absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
-          <div className="p-6 flex items-center justify-between border-b border-gray-100">
-            <Image src="/logo.png" alt="NMM Logo" width={80} height={35} className="brightness-0" />
+          <div className="p-4 flex items-center justify-end border-b border-gray-100">
             <button 
               onClick={() => setMobileMenuOpen(false)}
-              className="text-gray-400 hover:text-cyan-500 transition-colors"
+              className="text-gray-400 hover:text-red-500 transition-colors bg-gray-50 hover:bg-red-50 rounded-full p-2"
             >
-              <X size={32} />
+              <X size={28} />
             </button>
           </div>
           

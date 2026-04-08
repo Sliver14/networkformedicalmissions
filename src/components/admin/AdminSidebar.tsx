@@ -17,7 +17,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 bg-slate-900 text-white flex flex-col">
+    <div className="w-64 h-full bg-slate-900 text-white flex flex-col shadow-xl lg:shadow-none">
       <div className="p-6">
         <h2 className="text-2xl font-bold text-white">NMM Admin</h2>
       </div>
