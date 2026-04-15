@@ -5,7 +5,24 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { subscribeNewsletter } from "@/app/actions/newsletter";
-import { ArrowRight, Phone, Mail, Twitter, Facebook, Instagram } from "lucide-react";
+import { ArrowRight, Phone, Mail, Twitter, Facebook, Instagram, MessageCircle } from "lucide-react";
+
+const TiktokIcon = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const Footer = () => {
   const pathname = usePathname();
@@ -32,6 +49,14 @@ const Footer = () => {
     }
     setLoading(false);
   };
+
+  const socialLinks = [
+    { icon: <MessageCircle size={18} />, href: "https://kingschat.online/user/officialnfmm" },
+    { icon: <TiktokIcon size={18} />, href: "https://www.tiktok.com/@officialnfmm" },
+    { icon: <Twitter size={18} />, href: "https://x.com/officialnfmm" },
+    { icon: <Facebook size={18} />, href: "https://www.facebook.com/officialnfmm/" },
+    { icon: <Instagram size={18} />, href: "https://www.instagram.com/networkformedicalmissions/" }
+  ];
 
   return (
     <footer className="bg-gray-900 text-gray-300 pt-16 md:pt-20 pb-10 relative overflow-hidden">
@@ -123,12 +148,14 @@ const Footer = () => {
               <Image src="/logo.png" alt="NMM Logo" width={100} height={40} className="brightness-110" />
             </Link>
             <div className="flex space-x-4">
-              {[
-                { icon: <Twitter size={18} />, href: "#" },
-                { icon: <Facebook size={18} />, href: "#" },
-                { icon: <Instagram size={18} />, href: "#" }
-              ].map((social, i) => (
-                <a key={i} href={social.href} className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-xl text-gray-400 hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">
+              {socialLinks.map((social, i) => (
+                <a 
+                  key={i} 
+                  href={social.href} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-800 w-10 h-10 flex items-center justify-center rounded-xl text-gray-400 hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110"
+                >
                   {social.icon}
                 </a>
               ))}

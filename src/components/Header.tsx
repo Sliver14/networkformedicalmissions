@@ -4,8 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Mail, Facebook, Twitter, Instagram, Heart, User, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, Mail, Twitter, Instagram, Facebook, Heart, User, LogOut, MessageCircle } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+
+const TiktokIcon = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const Header = () => {
   const pathname = usePathname();
@@ -72,6 +89,14 @@ const Header = () => {
     { name: "Contact", href: "/contact" },
   ];
 
+  const socialLinks = [
+    { icon: <MessageCircle size={16} />, href: "https://kingschat.online/user/officialnfmm" },
+    { icon: <TiktokIcon size={16} />, href: "https://www.tiktok.com/@officialnfmm" },
+    { icon: <Twitter size={16} />, href: "https://x.com/officialnfmm" },
+    { icon: <Facebook size={16} />, href: "https://www.facebook.com/officialnfmm/" },
+    { icon: <Instagram size={16} />, href: "https://www.instagram.com/networkformedicalmissions/" },
+  ];
+
   return (
     <header className={`w-full z-[100] transition-all duration-300 ${isSticky ? "fixed top-0 bg-white shadow-xl" : "relative bg-white"}`}>
       {/* Top Bar */}
@@ -86,9 +111,17 @@ const Header = () => {
               </div>
             </div>
             <div className="flex items-center space-x-6 text-gray-400">
-              <a href="#" className="hover:text-cyan-500 transition-colors"><Twitter size={16} /></a>
-              <a href="#" className="hover:text-cyan-500 transition-colors"><Facebook size={16} /></a>
-              <a href="#" className="hover:text-cyan-500 transition-colors"><Instagram size={16} /></a>
+              {socialLinks.map((social, index) => (
+                <a 
+                  key={index} 
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-cyan-500 transition-colors"
+                >
+                  {social.icon}
+                </a>
+              ))}
               {session ? (
                 <div className="flex items-center space-x-4 border-l pl-6 border-gray-200">
                    <Link href="/profile" className="flex items-center text-gray-600 hover:text-cyan-500">
@@ -276,9 +309,21 @@ const Header = () => {
               <Heart size={20} className="mr-2 fill-current" /> Donate Now
             </Link>
             <div className="flex justify-center space-x-6 text-gray-400">
-              <Twitter size={24} />
-              <Facebook size={24} />
-              <Instagram size={24} />
+              <a href="https://kingschat.online/user/officialnfmm" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
+                <MessageCircle size={24} />
+              </a>
+              <a href="https://www.tiktok.com/@officialnfmm" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
+                <TiktokIcon size={24} />
+              </a>
+              <a href="https://x.com/officialnfmm" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
+                <Twitter size={24} />
+              </a>
+              <a href="https://www.facebook.com/officialnfmm/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
+                <Facebook size={24} />
+              </a>
+              <a href="https://www.instagram.com/networkformedicalmissions/" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
+                <Instagram size={24} />
+              </a>
             </div>
           </div>
         </div>
