@@ -24,6 +24,10 @@ const TiktokIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
+const KingschatIcon = ({ size = 24, className = "" }) => (
+  <Image src="/kingschat.png" alt="Kingschat" width={size} height={size} className={`object-contain grayscale hover:grayscale-0 transition-all ${className}`} style={{ filter: 'brightness(0) invert(0.6)' }} />
+);
+
 const Header = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -90,7 +94,7 @@ const Header = () => {
   ];
 
   const socialLinks = [
-    { icon: <MessageCircle size={16} />, href: "https://kingschat.online/user/officialnfmm" },
+    { icon: <KingschatIcon size={16} />, href: "https://kingschat.online/user/officialnfmm" },
     { icon: <TiktokIcon size={16} />, href: "https://www.tiktok.com/@officialnfmm" },
     { icon: <Twitter size={16} />, href: "https://x.com/officialnfmm" },
     { icon: <Facebook size={16} />, href: "https://www.facebook.com/officialnfmm/" },
@@ -310,7 +314,7 @@ const Header = () => {
             </Link>
             <div className="flex justify-center space-x-6 text-gray-400">
               <a href="https://kingschat.online/user/officialnfmm" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
-                <MessageCircle size={24} />
+                <KingschatIcon size={24} />
               </a>
               <a href="https://www.tiktok.com/@officialnfmm" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-500 transition-colors">
                 <TiktokIcon size={24} />

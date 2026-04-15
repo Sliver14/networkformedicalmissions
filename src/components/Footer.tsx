@@ -24,6 +24,10 @@ const TiktokIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
+const KingschatIcon = ({ size = 24, className = "" }) => (
+  <Image src="/kingschat.png" alt="Kingschat" width={size} height={size} className={`object-contain grayscale hover:grayscale-0 transition-all ${className}`} style={{ filter: 'brightness(0) invert(0.6)' }} />
+);
+
 const Footer = () => {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
@@ -51,7 +55,7 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <MessageCircle size={18} />, href: "https://kingschat.online/user/officialnfmm" },
+    { icon: <KingschatIcon size={18} />, href: "https://kingschat.online/user/officialnfmm" },
     { icon: <TiktokIcon size={18} />, href: "https://www.tiktok.com/@officialnfmm" },
     { icon: <Twitter size={18} />, href: "https://x.com/officialnfmm" },
     { icon: <Facebook size={18} />, href: "https://www.facebook.com/officialnfmm/" },
