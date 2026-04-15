@@ -8,19 +8,19 @@ const HeroSlider = () => {
 
   const slides = [
     {
-      video: "https://www.shutterstock.com/shutterstock/videos/1016892217/preview/stock-footage-dolly-shot-of-doctor-examining-girl-s-leg-sitting-with-woman-and-checking-reports-in-digital-tablet.webm",
+      video: "/slider1.mp4",
       tagline: "Christ for the Hurting Medical Mission Trips",
       title: "Networking the World for Good",
       btnText: "Learn More",
       btnLink: "/about"
     },
-    {
-      video: "https://www.shutterstock.com/shutterstock/videos/4006999457/preview/stock-footage-female-dentist-performing-dental-procedure-on-male-patient.webm",
-      tagline: "Providing Free Surgeries & Medical Services",
-      title: "Help the Poor in Need",
-      btnText: "Our Programs",
-      btnLink: "/programs/free-surgeries"
-    }
+    // {
+    //   video: "https://www.shutterstock.com/shutterstock/videos/4006999457/preview/stock-footage-female-dentist-performing-dental-procedure-on-male-patient.webm",
+    //   tagline: "Providing Free Surgeries & Medical Services",
+    //   title: "Help the Poor in Need",
+    //   btnText: "Our Programs",
+    //   btnLink: "/programs/free-surgeries"
+    // }
   ];
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const HeroSlider = () => {
         ))}
         
         {/* Simple Pagination */}
-        <div className="absolute bottom-[51px] left-1/2 -translate-x-1/2 z-[40] flex space-x-2">
+        {/* <div className="absolute bottom-[51px] left-1/2 -translate-x-1/2 z-[40] flex space-x-2">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -92,7 +92,7 @@ const HeroSlider = () => {
               className={`w-[12px] h-[12px] rounded-full transition-all ${index === currentSlide ? "bg-white opacity-100" : "bg-white opacity-50"}`}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

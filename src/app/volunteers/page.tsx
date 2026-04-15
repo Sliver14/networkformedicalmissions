@@ -5,9 +5,12 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import { applyVolunteer } from "@/app/actions/volunteer";
 
+import LocationSelector from "@/components/LocationSelector";
+
 const VolunteerPage = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [location, setLocation] = useState({ country: "", state: "" });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,13 +87,26 @@ const VolunteerPage = () => {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <select 
+                        name="title"
+                        required 
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>Title</option>
+                        <option value="Mr">Mr.</option>
+                        <option value="Mrs">Mrs.</option>
+                        <option value="Ms">Ms.</option>
+                        <option value="Dr">Dr.</option>
+                        <option value="Prof">Prof.</option>
+                        <option value="Rev">Rev.</option>
+                      </select>
                       <input 
                         name="firstName"
                         type="text" 
                         placeholder="First Name" 
                         required 
-                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all md:col-span-1"
                       />
                       <input 
                         name="lastName"
@@ -101,6 +117,15 @@ const VolunteerPage = () => {
                       />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <select 
+                        name="gender"
+                        required 
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
                       <input 
                         name="email"
                         type="email" 
@@ -108,34 +133,37 @@ const VolunteerPage = () => {
                         required 
                         className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                       />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <input 
                         name="phone"
                         type="text" 
                         placeholder="Phone Number" 
                         className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                       />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <input 
-                        name="country"
+                        name="qualification"
                         type="text" 
-                        placeholder="Country" 
+                        placeholder="Qualification (e.g. MBBS, BSc Nursing)" 
                         required 
                         className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                       />
-                      <select 
-                        name="profession"
-                        required 
-                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
-                      >
-                        <option value="" disabled selected>Select Profession</option>
-                        <option value="Physician">Physician</option>
-                        <option value="Nurse">Nurse</option>
-                        <option value="Specialist">Specialist</option>
-                        <option value="Non-Medical">Non-Medical Volunteer</option>
-                        <option value="Partner">Partner Organization</option>
-                      </select>
                     </div>
+                    
+                    <div className="space-y-6">
+                      <LocationSelector 
+                        onLocationChange={(loc) => setLocation(loc)} 
+                        required 
+                      />
+                      <input 
+                        name="city"
+                        type="text" 
+                        placeholder="Enter City" 
+                        required 
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                      />
+                    </div>
+
                     <textarea 
                       name="availabilityMessage"
                       placeholder="Message / Availability" 

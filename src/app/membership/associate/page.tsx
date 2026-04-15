@@ -4,14 +4,21 @@ import PageHeader from "@/components/PageHeader";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
+import LocationSelector from "@/components/LocationSelector";
+
 const AssociateMembershipPage = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
+    title: "",
     name: "",
+    gender: "",
     email: "",
     phone: "",
-    specialization: "",
-    message: ""
+    qualification: "",
+    message: "",
+    country: "",
+    state: "",
+    city: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,10 +32,15 @@ const AssociateMembershipPage = () => {
           email: formData.email,
           amount: 50,
           metadata: {
+            title: formData.title,
             name: formData.name,
+            gender: formData.gender,
             phone: formData.phone,
-            specialization: formData.specialization,
-            type: "membership_associate"
+            qualification: formData.qualification,
+            type: "membership_associate",
+            country: formData.country,
+            state: formData.state,
+            city: formData.city
           }
         })
       });
@@ -85,36 +97,85 @@ const AssociateMembershipPage = () => {
             <div className="lg:w-7/12 mt-8 lg:mt-0">
               <div className="bg-white rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl shadow-gray-200 border border-gray-100">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <input 
-                    type="text" 
-                    placeholder="Full Name" 
-                    required 
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-                  />
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
-                    required 
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-                  />
-                  <input 
-                    type="text" 
-                    placeholder="Phone Number" 
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-                  />
-                  <input 
-                    type="text" 
-                    placeholder="Specialization (e.g. Surgeon, Nurse)" 
-                    value={formData.specialization}
-                    onChange={(e) => setFormData({...formData, specialization: e.target.value})}
-                    className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-                  />
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <select 
+                      required 
+                      value={formData.title}
+                      onChange={(e) => setFormData({...formData, title: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Title</option>
+                      <option value="Mr">Mr.</option>
+                      <option value="Mrs">Mrs.</option>
+                      <option value="Ms">Ms.</option>
+                      <option value="Dr">Dr.</option>
+                      <option value="Prof">Prof.</option>
+                      <option value="Rev">Rev.</option>
+                    </select>
+                    <input 
+                      type="text" 
+                      placeholder="Full Name" 
+                      required 
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all md:col-span-2"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <select 
+                      required 
+                      value={formData.gender}
+                      onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                    <input 
+                      type="email" 
+                      placeholder="Email Address" 
+                      required 
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input 
+                      type="text" 
+                      placeholder="Phone Number" 
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                    />
+                    <input 
+                      type="text" 
+                      placeholder="Qualification (e.g. MBBS, BSc Nursing)" 
+                      value={formData.qualification}
+                      onChange={(e) => setFormData({...formData, qualification: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-4">
+                    <label className="text-sm font-bold text-gray-700 ml-1">Location Details</label>
+                    <LocationSelector 
+                      onLocationChange={(loc) => setFormData({...formData, ...loc})} 
+                      required 
+                    />
+                    <input 
+                      type="text" 
+                      placeholder="Enter City" 
+                      required 
+                      value={formData.city}
+                      onChange={(e) => setFormData({...formData, city: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                    />
+                  </div>
+
                   <textarea 
                     placeholder="Briefly tell us why you want to join" 
                     rows={4}

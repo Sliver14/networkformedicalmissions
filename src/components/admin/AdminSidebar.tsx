@@ -11,6 +11,7 @@ const navItems = [
   { name: "News", href: "/admin/news", icon: Newspaper },
   { name: "Events", href: "/admin/events", icon: Calendar },
   { name: "Memberships", href: "/admin/memberships", icon: Users },
+  { name: "Volunteers", href: "/admin/volunteers", icon: Users },
   { name: "Newsletter", href: "/admin/newsletter", icon: Mail },
 ];
 

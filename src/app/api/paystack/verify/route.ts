@@ -29,8 +29,25 @@ export async function GET(request: Request) {
         // Find or create user
         const user = await prisma.user.upsert({
           where: { email },
-          update: { name: metadata.name },
-          create: { email, name: metadata.name },
+          update: { 
+            name: metadata.name,
+            title: metadata.title,
+            gender: metadata.gender,
+            qualification: metadata.qualification,
+            country: metadata.country,
+            state: metadata.state,
+            city: metadata.city
+          },
+          create: { 
+            email, 
+            name: metadata.name,
+            title: metadata.title,
+            gender: metadata.gender,
+            qualification: metadata.qualification,
+            country: metadata.country,
+            state: metadata.state,
+            city: metadata.city
+          },
         });
 
         // Create membership

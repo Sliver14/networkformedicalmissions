@@ -18,6 +18,12 @@ model User {
   password      String?
   role          String    @default("USER")
   image         String?
+  title         String?
+  gender        String?
+  qualification String?
+  country       String?
+  state         String?
+  city          String?
   accounts      Account[]
   sessions      Session[]
   memberships   Membership[]
@@ -98,12 +104,16 @@ model Transaction {
 
 model Volunteer {
   id                  Int      @id @default(autoincrement())
+  title               String?
   firstName           String
   lastName            String
+  gender              String?
   email               String   @unique
   phone               String?
-  profession          String?  // e.g., Doctor, Nurse, Non-Medical
+  qualification       String?
   country             String
+  state               String?
+  city                String?
   availabilityMessage String?
   status              String   @default("Pending") // Pending, Approved, Rejected
   createdAt           DateTime @default(now())

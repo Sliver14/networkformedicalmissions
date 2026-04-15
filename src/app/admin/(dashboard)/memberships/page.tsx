@@ -10,6 +10,12 @@ export default async function AdminMembershipsPage() {
         select: {
           name: true,
           email: true,
+          title: true,
+          gender: true,
+          qualification: true,
+          country: true,
+          state: true,
+          city: true,
         }
       },
       transactions: {
@@ -32,7 +38,9 @@ export default async function AdminMembershipsPage() {
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Member</th>
-                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
+                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
+                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Qualification</th>
+                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Location</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Amount Paid</th>
@@ -45,11 +53,23 @@ export default async function AdminMembershipsPage() {
                 const totalPaid = membership.transactions.reduce((acc, curr) => acc + curr.amount, 0);
                 return (
                   <tr key={membership.id} className="hover:bg-gray-50">
-                    <td className="py-4 px-6 text-sm text-gray-900 font-medium">
-                      {membership.user.name || "N/A"}
+                    <td className="py-4 px-6 text-sm">
+                      <div className="font-medium text-gray-900">
+                        {membership.user.title ? `${membership.user.title}. ` : ''}
+                        {membership.user.name || "N/A"}
+                      </div>
+                      <div className="text-gray-500 text-xs">{membership.user.email}</div>
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500">
-                      {membership.user.email}
+                      {membership.user.gender || "N/A"}
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500">
+                      {membership.user.qualification || "N/A"}
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500">
+                      {membership.user.city ? `${membership.user.city}, ` : ''}
+                      {membership.user.state ? `${membership.user.state}, ` : ''}
+                      {membership.user.country || 'N/A'}
                     </td>
                     <td className="py-4 px-6 text-sm">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
