@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   let upcomingEvents: any[] = [];
   let latestNews: any[] = [];
+  let latestGallery: any[] = [];
 
   try {
     upcomingEvents = await prisma.event.findMany({
@@ -26,9 +27,22 @@ export default async function Home() {
         }
       }
     });
+
+    latestGallery = await prisma.gallery.findMany({
+      where: { isActive: true, type: "image" },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+    });
   } catch (error) {
     console.warn("Database connection failed, using fallback empty data:", error);
   }
+
+  // Fallback gallery items if DB is empty
+  const galleryDisplay = latestGallery.length > 0 ? latestGallery : [
+    { title: "Mission Trip", url: "/1.jpeg" },
+    { title: "Team Work", url: "/2.jpeg" },
+    { title: "Health Fair", url: "/4.jpeg" },
+  ];
 
   return (
     <div className="flex flex-col w-full">
@@ -133,6 +147,31 @@ export default async function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Gallery Images */}
+      <section className="gallery-one py-[60px] md:py-[100px] bg-gray-50">
+        <div className="container">
+          <div className="section-title text-center">
+            <span className="section-title__tagline font-black">Our Gallery</span>
+            <h2 className="section-title__title font-black">Latest mission images</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+            {galleryDisplay.map((item, index) => (
+              <div key={index} className="gallery-one__single group relative overflow-hidden rounded-3xl shadow-lg h-[250px] md:h-[300px]">
+                <Image src={item.url} alt={item.title || "Gallery Image"} fill className="object-cover transition-transform duration-700 group-hover:scale-110" unoptimized />
+                <div className="absolute inset-0 bg-cyan-500/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 text-center">
+                  <h3 className="text-white text-xl font-black transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{item.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link href="/gallery" className="thm-btn">
+              <i className="fas fa-arrow-circle-right"></i> View Full Gallery
+            </Link>
           </div>
         </div>
       </section>

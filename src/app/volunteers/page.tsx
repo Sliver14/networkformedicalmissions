@@ -141,13 +141,36 @@ const VolunteerPage = () => {
                         placeholder="Phone Number" 
                         className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                       />
-                      <input 
-                        name="qualification"
-                        type="text" 
-                        placeholder="Qualification (e.g. MBBS, BSc Nursing)" 
+                      <select 
+                        name="profession"
                         required 
-                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-                      />
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>Select Profession</option>
+                        {[
+                          "Doctor", "Nurse", "Pharmacist", "Laboratory Technician", "Laboratory Scientist",
+                          "Public Health Practitioner", "Paramedic", "Information Technology", "Physiotherapist",
+                          "Dentist", "Aid Worker", "Hospice Worker", "Emergency Medical Technician",
+                          "Ophthalmologist", "Optometrist", "Medical and Health Services Manager", "Social Worker",
+                          "Psychologist", "Dietician", "Pathologist", "Media Practitioner", "Nutritionist",
+                          "Psychiatrist", "Pharmacy Technician", "Student", "Others"
+                        ].map(p => <option key={p} value={p}>{p}</option>)}
+                      </select>
+                    </div>
+                    <div className="grid grid-cols-1 gap-6">
+                      <select 
+                        name="qualification"
+                        required 
+                        className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>Select Qualification</option>
+                        {[
+                          "School Leaver", "Pre-Med", "Undergraduate", "Medical Student", "Intern",
+                          "Medical Officer", "Nurse Practitioner", "Resident", "Chief Resident",
+                          "Specialist Surgeons", "MSc", "PhD", "CNO", "Fellow", "Attending Physician",
+                          "Health Care Administrator", "Medical Director", "Professor", "Dean", "Others"
+                        ].map(q => <option key={q} value={q}>{q}</option>)}
+                      </select>
                     </div>
                     
                     <div className="space-y-6">

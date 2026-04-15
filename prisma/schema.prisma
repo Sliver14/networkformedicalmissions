@@ -20,7 +20,9 @@ model User {
   image         String?
   title         String?
   gender        String?
+  phone         String?
   qualification String?
+  profession    String?
   country       String?
   state         String?
   city          String?
@@ -111,6 +113,7 @@ model Volunteer {
   email               String   @unique
   phone               String?
   qualification       String?
+  profession          String?
   country             String
   state               String?
   city                String?
@@ -178,7 +181,8 @@ model Program {
 model Gallery {
   id        Int      @id @default(autoincrement())
   title     String
-  imagePath String
+  url       String
+  type      String   @default("image") // "image" or "video"
   caption   String?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())

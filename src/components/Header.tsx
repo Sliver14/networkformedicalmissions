@@ -4,10 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Mail, Facebook, Twitter, Instagram, Heart } from "lucide-react";
+import { Menu, X, ChevronDown, Mail, Facebook, Twitter, Instagram, Heart, User, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [isSticky, setIsSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
@@ -36,7 +38,6 @@ const Header = () => {
       subLinks: [
         { name: "Our Mission & Values", href: "/about" },
         { name: "Selection Criteria", href: "/criteria" },
-        { name: "Our Gallery", href: "/gallery" },
       ]
     },
     { 
@@ -50,7 +51,15 @@ const Header = () => {
       ]
     },
     { name: "Events", href: "/events" },
-    { name: "News", href: "/news" },
+    { 
+      name: "News", 
+      href: "#",
+      subLinks: [
+        { name: "Latest News", href: "/news" },
+        { name: "Image Gallery", href: "/gallery" },
+        { name: "Video Gallery", href: "/gallery/videos" },
+      ]
+    },
     { 
       name: "Membership", 
       href: "#",
@@ -80,6 +89,23 @@ const Header = () => {
               <a href="#" className="hover:text-cyan-500 transition-colors"><Twitter size={16} /></a>
               <a href="#" className="hover:text-cyan-500 transition-colors"><Facebook size={16} /></a>
               <a href="#" className="hover:text-cyan-500 transition-colors"><Instagram size={16} /></a>
+              {session ? (
+                <div className="flex items-center space-x-4 border-l pl-6 border-gray-200">
+                   <Link href="/profile" className="flex items-center text-gray-600 hover:text-cyan-500">
+                    <User size={16} className="mr-2" />
+                    <span>Profile</span>
+                   </Link>
+                   <button onClick={() => signOut()} className="flex items-center text-gray-600 hover:text-red-500">
+                    <LogOut size={16} className="mr-2" />
+                    <span>Logout</span>
+                   </button>
+                </div>
+              ) : (
+                <Link href="/login" className="flex items-center text-gray-600 hover:text-cyan-500 border-l pl-6 border-gray-200 uppercase text-xs tracking-widest">
+                  <User size={16} className="mr-2" />
+                  <span>Login</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -122,6 +148,8 @@ const Header = () => {
               )}
             </div>
           ))}
+          {/* Mobile Profile Toggle or Login Link in sticky mode */}
+          
         </nav>
 
         {/* Action Button & Mobile Toggle */}
@@ -205,6 +233,37 @@ const Header = () => {
                   )}
                 </div>
               ))}
+              {/* Mobile Auth Links */}
+              <div className="pt-4 border-t border-gray-100 mt-4">
+                {session ? (
+                  <>
+                    <Link 
+                      href="/profile" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center space-x-4 px-4 py-3 font-semibold text-gray-800 text-lg hover:bg-cyan-50 hover:text-cyan-500 rounded-xl transition-colors"
+                    >
+                      <User size={20} />
+                      <span>My Profile</span>
+                    </Link>
+                    <button 
+                      onClick={() => { signOut(); setMobileMenuOpen(false); }}
+                      className="w-full flex items-center space-x-4 px-4 py-3 font-semibold text-red-600 text-lg hover:bg-red-50 rounded-xl transition-colors"
+                    >
+                      <LogOut size={20} />
+                      <span>Logout</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link 
+                    href="/login" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center space-x-4 px-4 py-3 font-semibold text-gray-800 text-lg hover:bg-cyan-50 hover:text-cyan-500 rounded-xl transition-colors"
+                  >
+                    <User size={20} />
+                    <span>Member Login</span>
+                  </Link>
+                )}
+              </div>
             </nav>
           </div>
           

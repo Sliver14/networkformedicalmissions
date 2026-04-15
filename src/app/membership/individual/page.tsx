@@ -14,6 +14,7 @@ const IndividualMembershipPage = () => {
     gender: "",
     email: "",
     phone: "",
+    password: "",
     message: "",
     country: "",
     state: "",
@@ -35,6 +36,7 @@ const IndividualMembershipPage = () => {
             name: formData.name,
             gender: formData.gender,
             phone: formData.phone,
+            password: formData.password,
             type: "membership_individual",
             country: formData.country,
             state: formData.state,
@@ -145,6 +147,15 @@ const IndividualMembershipPage = () => {
                     placeholder="Phone Number" 
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
+                  />
+
+                  <input 
+                    type="password" 
+                    placeholder="Set Password" 
+                    required 
+                    value={formData.password}
+                    onChange={(e) => setFormData({...formData, password: e.target.value})}
                     className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                   />
 

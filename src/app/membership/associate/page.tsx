@@ -14,6 +14,8 @@ const AssociateMembershipPage = () => {
     gender: "",
     email: "",
     phone: "",
+    password: "",
+    profession: "",
     qualification: "",
     message: "",
     country: "",
@@ -36,6 +38,8 @@ const AssociateMembershipPage = () => {
             name: formData.name,
             gender: formData.gender,
             phone: formData.phone,
+            password: formData.password,
+            profession: formData.profession,
             qualification: formData.qualification,
             type: "membership_associate",
             country: formData.country,
@@ -152,12 +156,47 @@ const AssociateMembershipPage = () => {
                       className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                     />
                     <input 
-                      type="text" 
-                      placeholder="Qualification (e.g. MBBS, BSc Nursing)" 
-                      value={formData.qualification}
-                      onChange={(e) => setFormData({...formData, qualification: e.target.value})}
+                      type="password" 
+                      placeholder="Set Password" 
+                      required 
+                      value={formData.password}
+                      onChange={(e) => setFormData({...formData, password: e.target.value})}
                       className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                     />
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    <select 
+                      required 
+                      value={formData.profession}
+                      onChange={(e) => setFormData({...formData, profession: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Select Profession</option>
+                      {[
+                        "Doctor", "Nurse", "Pharmacist", "Laboratory Technician", "Laboratory Scientist",
+                        "Public Health Practitioner", "Paramedic", "Information Technology", "Physiotherapist",
+                        "Dentist", "Aid Worker", "Hospice Worker", "Emergency Medical Technician",
+                        "Ophthalmologist", "Optometrist", "Medical and Health Services Manager", "Social Worker",
+                        "Psychologist", "Dietician", "Pathologist", "Media Practitioner", "Nutritionist",
+                        "Psychiatrist", "Pharmacy Technician", "Student", "Others"
+                      ].map(p => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    <select 
+                      required 
+                      value={formData.qualification}
+                      onChange={(e) => setFormData({...formData, qualification: e.target.value})}
+                      className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Select Qualification</option>
+                      {[
+                        "School Leaver", "Pre-Med", "Undergraduate", "Medical Student", "Intern",
+                        "Medical Officer", "Nurse Practitioner", "Resident", "Chief Resident",
+                        "Specialist Surgeons", "MSc", "PhD", "CNO", "Fellow", "Attending Physician",
+                        "Health Care Administrator", "Medical Director", "Professor", "Dean", "Others"
+                      ].map(q => <option key={q} value={q}>{q}</option>)}
+                    </select>
                   </div>
 
                   <div className="space-y-4">

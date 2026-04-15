@@ -21,6 +21,7 @@ export default async function AdminVolunteersPage() {
               <tr className="bg-gray-50 border-b border-gray-200">
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Volunteer</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
+                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Profession</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Location</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Qualification</th>
@@ -40,6 +41,9 @@ export default async function AdminVolunteersPage() {
                   </td>
                   <td className="py-4 px-6 text-sm text-gray-500">
                     {volunteer.gender || "N/A"}
+                  </td>
+                  <td className="py-4 px-6 text-sm text-gray-500">
+                    {volunteer.profession || "N/A"}
                   </td>
                   <td className="py-4 px-6 text-sm text-gray-500">
                     {volunteer.phone || "N/A"}

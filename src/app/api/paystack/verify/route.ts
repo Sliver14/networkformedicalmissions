@@ -26,51 +26,31 @@ export async function GET(request: Request) {
 
       // Handle Database Storage
       if (metadata.type?.startsWith('membership')) {
-        // Find or create user
-        const user = await prisma.user.upsert({
-          where: { email },
-          update: { 
-            name: metadata.name,
-            title: metadata.title,
-            gender: metadata.gender,
-            qualification: metadata.qualification,
-            country: metadata.country,
-            state: metadata.state,
-            city: metadata.city
-          },
-          create: { 
-            email, 
-            name: metadata.name,
-            title: metadata.title,
-            gender: metadata.gender,
-            qualification: metadata.qualification,
-            country: metadata.country,
-            state: metadata.state,
-            city: metadata.city
-          },
-        });
+        const userId = metadata.userId;
+        const membershipId = metadata.membershipId;
 
-        // Create membership
-        const membership = await prisma.membership.create({
-          data: {
-            userId: user.id,
-            type: metadata.type === 'membership_associate' ? 'Associate' : 'Individual',
-            status: 'Active',
-            expiryDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // 1 year
-          },
-        });
+        if (userId && membershipId) {
+          // Update membership
+          await prisma.membership.update({
+            where: { id: Number(membershipId) },
+            data: {
+              status: 'Active',
+              expiryDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)), // 1 year
+            },
+          });
 
-        // Record transaction
-        await prisma.transaction.create({
-          data: {
-            userId: user.id,
-            membershipId: membership.id,
-            reference,
-            amount,
-            status: 'Success',
-            metadata: metadata,
-          },
-        });
+          // Record transaction
+          await prisma.transaction.create({
+            data: {
+              userId: userId,
+              membershipId: Number(membershipId),
+              reference,
+              amount,
+              status: 'Success',
+              metadata: JSON.stringify(metadata),
+            },
+          });
+        }
 
         return NextResponse.redirect(new URL('/membership/success', request.url));
       } else if (metadata.type === 'donation') {
@@ -84,7 +64,7 @@ export async function GET(request: Request) {
             reference,
             amount,
             status: 'Success',
-            metadata: metadata,
+            metadata: JSON.stringify(metadata),
           },
         });
 

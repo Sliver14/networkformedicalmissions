@@ -12,6 +12,7 @@ export default async function AdminMembershipsPage() {
           email: true,
           title: true,
           gender: true,
+          profession: true,
           qualification: true,
           country: true,
           state: true,
@@ -39,6 +40,7 @@ export default async function AdminMembershipsPage() {
               <tr className="bg-gray-50 border-b border-gray-200">
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Member</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Gender</th>
+                <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Profession</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Qualification</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Location</th>
                 <th className="py-3 px-6 text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
@@ -62,6 +64,9 @@ export default async function AdminMembershipsPage() {
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500">
                       {membership.user.gender || "N/A"}
+                    </td>
+                    <td className="py-4 px-6 text-sm text-gray-500">
+                      {membership.user.profession || "N/A"}
                     </td>
                     <td className="py-4 px-6 text-sm text-gray-500">
                       {membership.user.qualification || "N/A"}

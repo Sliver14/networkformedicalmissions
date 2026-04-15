@@ -9,7 +9,10 @@ export default async function GalleryPage() {
 
   try {
     galleryItems = await prisma.gallery.findMany({
-      where: { isActive: true },
+      where: { 
+        isActive: true,
+        type: "image"
+      },
       orderBy: { createdAt: "desc" },
     });
   } catch (error) {
@@ -17,19 +20,19 @@ export default async function GalleryPage() {
   }
 
   const displayItems = galleryItems.length > 0 ? galleryItems : [
-    { title: "Medical Outreach 1", imagePath: "/1.jpeg" },
-    { title: "Surgical Team", imagePath: "/2.jpeg" },
-    { title: "Community Health Fair", imagePath: "/4.jpeg" },
-    { title: "Patient Care", imagePath: "/5.jpeg" },
-    { title: "Mission Trip", imagePath: "/6.jpeg" },
-    { title: "Medical Supplies", imagePath: "/7.jpeg" },
+    { title: "Medical Outreach 1", url: "/1.jpeg" },
+    { title: "Surgical Team", url: "/2.jpeg" },
+    { title: "Community Health Fair", url: "/4.jpeg" },
+    { title: "Patient Care", url: "/5.jpeg" },
+    { title: "Mission Trip", url: "/6.jpeg" },
+    { title: "Medical Supplies", url: "/7.jpeg" },
   ];
 
   return (
     <div className="flex flex-col w-full">
       <PageHeader 
-        title="Our Gallery" 
-        breadcrumb={[{ label: "Gallery" }]} 
+        title="Image Gallery" 
+        breadcrumb={[{ label: "Media" }, { label: "Image Gallery" }]} 
       />
 
       <section className="py-16 lg:py-24 bg-white">
@@ -38,7 +41,7 @@ export default async function GalleryPage() {
             {displayItems.map((item, index) => (
               <div key={index} className="group relative overflow-hidden rounded-3xl shadow-xl h-[250px] md:h-[350px]">
                 <Image 
-                  src={item.imagePath} 
+                  src={item.url} 
                   alt={item.title} 
                   fill 
                   className="object-cover transition-transform duration-700 group-hover:scale-110" 
@@ -52,6 +55,12 @@ export default async function GalleryPage() {
               </div>
             ))}
           </div>
+
+          {displayItems.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-gray-500 font-medium">No images found in the gallery.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>

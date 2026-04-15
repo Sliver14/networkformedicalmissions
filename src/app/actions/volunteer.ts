@@ -13,6 +13,7 @@ export async function applyVolunteer(formData: FormData) {
     const country = (formData.get("countryName") || formData.get("country")) as string;
     const state = (formData.get("stateName") || formData.get("state")) as string;
     const city = formData.get("city") as string;
+    const profession = formData.get("profession") as string;
     const qualification = formData.get("qualification") as string;
     const availabilityMessage = formData.get("availabilityMessage") as string;
 
@@ -36,6 +37,7 @@ export async function applyVolunteer(formData: FormData) {
         country,
         state,
         city,
+        profession,
         qualification,
         availabilityMessage,
         status: "Pending",
