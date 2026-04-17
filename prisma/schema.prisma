@@ -97,7 +97,7 @@ model Transaction {
   reference    String      @unique
   amount       Float
   status       String      @default("Pending") // Pending, Success, Failed
-  metadata     String?     // SQLite uses String for JSON-like data
+  metadata     String?     @db.LongText // SQLite uses String for JSON-like data
   user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   membership   Membership? @relation(fields: [membershipId], references: [id], onDelete: SetNull)
   createdAt    DateTime    @default(now())
@@ -117,7 +117,7 @@ model Volunteer {
   country             String
   state               String?
   city                String?
-  availabilityMessage String?
+  availabilityMessage String?  @db.LongText
   status              String   @default("Pending") // Pending, Approved, Rejected
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
@@ -127,7 +127,7 @@ model News {
   id          Int       @id @default(autoincrement())
   title       String
   slug        String    @unique
-  content     String
+  content     String    @db.LongText
   image       String?
   views       BigInt    @default(0)
   likes       BigInt    @default(0)
@@ -143,7 +143,7 @@ model Comment {
   newsId     Int
   name       String
   email      String
-  content    String
+  content    String   @db.LongText
   isApproved Boolean  @default(true)
   news       News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())
@@ -154,7 +154,7 @@ model Event {
   id          Int       @id @default(autoincrement())
   title       String
   slug        String    @unique
-  description String
+  description String    @db.LongText
   location    String?
   startDate   DateTime?
   endDate     DateTime?
@@ -168,8 +168,8 @@ model Program {
   id               Int      @id @default(autoincrement())
   title            String
   slug             String   @unique
-  shortDescription String
-  fullContent      String
+  shortDescription String   @db.Text
+  fullContent      String   @db.LongText
   featuredImage    String?
   organizerName    String   @default("Network for Medical Missions")
   organizerEmail   String   @default("contact@networkformedicalmissions.org")
@@ -192,7 +192,7 @@ model Gallery {
 model Value {
   id          Int      @id @default(autoincrement())
   title       String
-  description String?
+  description String?  @db.LongText
   icon        String?
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
@@ -202,7 +202,7 @@ model Value {
 model Faq {
   id        Int      @id @default(autoincrement())
   question  String
-  answer    String
+  answer    String   @db.LongText
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
