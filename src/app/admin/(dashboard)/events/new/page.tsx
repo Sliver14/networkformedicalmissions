@@ -50,7 +50,7 @@ export default function NewEventPage() {
               type="text"
               name="title"
               required
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
               placeholder="Enter event title"
             />
           </div>
@@ -61,7 +61,7 @@ export default function NewEventPage() {
             <input
               type="text"
               name="location"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
               placeholder="Event location"
             />
           </div>
@@ -75,7 +75,7 @@ export default function NewEventPage() {
             <input
               type="datetime-local"
               name="startDate"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
             />
           </div>
           <div>
@@ -85,7 +85,7 @@ export default function NewEventPage() {
             <input
               type="datetime-local"
               name="endDate"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
             />
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function NewEventPage() {
             name="isActive"
             id="isActive"
             defaultChecked
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded"
           />
           <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">
             Event is active/visible
@@ -121,7 +121,7 @@ export default function NewEventPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
+            className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
           >
             <Save className="w-5 h-5" />
             <span>{loading ? "Saving..." : "Save Event"}</span>

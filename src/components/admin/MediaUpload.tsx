@@ -58,7 +58,7 @@ export default function MediaUpload({ value, onChange, type }: MediaUploadProps)
         <label className="flex flex-col items-center justify-center w-full max-w-md h-64 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {uploading ? (
-              <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
+              <Loader2 className="w-12 h-12 text-cyan-500 animate-spin" />
             ) : (
               <>
                 <Upload className="w-12 h-12 text-gray-400 mb-4" />

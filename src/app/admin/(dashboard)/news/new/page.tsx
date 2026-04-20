@@ -50,7 +50,7 @@ export default function NewPostPage() {
             type="text"
             name="title"
             required
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
             placeholder="Enter post title"
           />
         </div>
@@ -67,7 +67,7 @@ export default function NewPostPage() {
             type="checkbox"
             name="isPublished"
             id="isPublished"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded"
           />
           <label htmlFor="isPublished" className="ml-2 block text-sm text-gray-900">
             Publish immediately
@@ -85,7 +85,7 @@ export default function NewPostPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
+            className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
           >
             <Save className="w-5 h-5" />
             <span>{loading ? "Saving..." : "Save Post"}</span>

@@ -79,7 +79,7 @@ export default async function AdminMembershipsPage() {
                     <td className="py-4 px-6 text-sm">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         membership.type === 'Honorary' ? 'bg-purple-100 text-purple-800' :
-                        membership.type === 'Associate' ? 'bg-blue-100 text-blue-800' :
+                        membership.type === 'Associate' ? 'bg-cyan-100 text-cyan-800' :
                         'bg-indigo-100 text-indigo-800'
                       }`}>
                         {membership.type}

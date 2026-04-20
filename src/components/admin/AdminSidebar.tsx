@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Newspaper, Mail, LogOut, Calendar, Users, Image as ImageIcon } from "lucide-react";
+import { LayoutDashboard, Newspaper, Mail, LogOut, Calendar, Users, Image as ImageIcon, Shield } from "lucide-react";
 import { signOut } from "next-auth/react";
 import clsx from "clsx";
 
@@ -14,6 +14,7 @@ const navItems = [
   { name: "Memberships", href: "/admin/memberships", icon: Users },
   { name: "Volunteers", href: "/admin/volunteers", icon: Users },
   { name: "Newsletter", href: "/admin/newsletter", icon: Mail },
+  { name: "Admins", href: "/admin/admins", icon: Shield },
 ];
 
 export default function AdminSidebar({ onNavClick }: { onNavClick?: () => void }) {
@@ -39,7 +40,7 @@ export default function AdminSidebar({ onNavClick }: { onNavClick?: () => void }
               className={clsx(
                 "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors",
                 isActive 
-                  ? "bg-blue-600 text-white" 
+                  ? "bg-cyan-600 text-white" 
                   : "text-slate-300 hover:bg-slate-800 hover:text-white"
               )}
             >

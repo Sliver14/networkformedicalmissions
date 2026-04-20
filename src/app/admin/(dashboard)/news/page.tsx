@@ -16,7 +16,7 @@ export default async function AdminNewsPage() {
         <h2 className="text-2xl font-bold text-gray-800">News</h2>
         <Link
           href="/admin/news/new"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+          className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
         >
           <Plus className="w-5 h-5" />
           <span>Create New Post</span>
@@ -58,7 +58,7 @@ export default async function AdminNewsPage() {
                 <td className="py-4 px-6 text-sm text-right flex justify-end space-x-3">
                   <Link
                     href={`/admin/news/${item.id}`}
-                    className="text-blue-600 hover:text-blue-900 flex items-center space-x-1"
+                    className="text-cyan-600 hover:text-cyan-900 flex items-center space-x-1"
                   >
                     <Edit className="w-4 h-4" />
                     <span>Edit</span>

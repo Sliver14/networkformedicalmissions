@@ -16,7 +16,7 @@ export default async function AdminGalleryPage() {
         <h2 className="text-2xl font-bold text-gray-800">Media Gallery</h2>
         <Link
           href="/admin/gallery/new"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
+          className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2"
         >
           <Plus className="w-5 h-5" />
           <span>Add Media</span>
@@ -52,7 +52,7 @@ export default async function AdminGalleryPage() {
             
             <div className="p-4">
               <div className="flex items-center gap-2 mb-1">
-                {item.type === "image" ? <ImageIcon size={14} className="text-blue-500" /> : <Film size={14} className="text-purple-500" />}
+                {item.type === "image" ? <ImageIcon size={14} className="text-cyan-500" /> : <Film size={14} className="text-purple-500" />}
                 <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{item.type}</span>
               </div>
               <h3 className="font-bold text-gray-800 truncate">{item.title}</h3>
@@ -65,7 +65,7 @@ export default async function AdminGalleryPage() {
           <div className="col-span-full py-20 text-center bg-white rounded-2xl border-2 border-dashed border-gray-200">
             <ImageIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-500 font-medium">No media found in the gallery.</p>
-            <Link href="/admin/gallery/new" className="text-blue-600 font-bold hover:underline mt-2 inline-block">
+            <Link href="/admin/gallery/new" className="text-cyan-600 font-bold hover:underline mt-2 inline-block">
               Upload your first image or video
             </Link>
           </div>

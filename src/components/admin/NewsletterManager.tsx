@@ -62,7 +62,7 @@ export default function NewsletterManager({ subscribers }: { subscribers: any[] 
           <button
             onClick={() => setActiveTab("list")}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              activeTab === "list" ? "bg-blue-50 text-blue-700" : "text-gray-500 hover:text-gray-700"
+              activeTab === "list" ? "bg-cyan-50 text-cyan-700" : "text-gray-500 hover:text-gray-700"
             }`}
           >
             Subscribers List
@@ -70,7 +70,7 @@ export default function NewsletterManager({ subscribers }: { subscribers: any[] 
           <button
             onClick={() => setActiveTab("compose")}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              activeTab === "compose" ? "bg-blue-50 text-blue-700" : "text-gray-500 hover:text-gray-700"
+              activeTab === "compose" ? "bg-cyan-50 text-cyan-700" : "text-gray-500 hover:text-gray-700"
             }`}
           >
             Compose Email
@@ -137,7 +137,7 @@ export default function NewsletterManager({ subscribers }: { subscribers: any[] 
               required
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
               placeholder="Newsletter Subject"
             />
           </div>
@@ -151,7 +151,7 @@ export default function NewsletterManager({ subscribers }: { subscribers: any[] 
             <button
               type="submit"
               disabled={loading || !subscribers.some(s => s.isSubscribed)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 disabled:opacity-50"
             >
               <Send className="w-5 h-5" />
               <span>{loading ? "Sending..." : "Send to All Active"}</span>

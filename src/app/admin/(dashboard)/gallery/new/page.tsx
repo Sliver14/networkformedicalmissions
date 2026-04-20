@@ -54,7 +54,7 @@ export default function NewGalleryItemPage() {
               type="button"
               onClick={() => { setType("image"); setUrl(""); }}
               className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${
-                type === "image" ? "border-blue-600 bg-blue-50 text-blue-600" : "border-gray-100 hover:border-gray-200"
+                type === "image" ? "border-cyan-600 bg-cyan-50 text-cyan-600" : "border-gray-100 hover:border-gray-200"
               }`}
             >
               <ImageIcon size={20} />
@@ -64,7 +64,7 @@ export default function NewGalleryItemPage() {
               type="button"
               onClick={() => { setType("video"); setUrl(""); }}
               className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${
-                type === "video" ? "border-blue-600 bg-blue-50 text-blue-600" : "border-gray-100 hover:border-gray-200"
+                type === "video" ? "border-cyan-600 bg-cyan-50 text-cyan-600" : "border-gray-100 hover:border-gray-200"
               }`}
             >
               <Film size={20} />
@@ -81,7 +81,7 @@ export default function NewGalleryItemPage() {
             type="text"
             name="title"
             required
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
             placeholder="Enter a descriptive title"
           />
         </div>
@@ -93,7 +93,7 @@ export default function NewGalleryItemPage() {
           <textarea
             name="caption"
             rows={3}
-            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 border p-2"
+            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 border p-2"
             placeholder="Enter a caption for the media"
           ></textarea>
         </div>
@@ -104,7 +104,7 @@ export default function NewGalleryItemPage() {
             name="isActive"
             id="isActive"
             defaultChecked
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded"
           />
           <label htmlFor="isActive" className="ml-2 block text-sm text-gray-900">
             Item is visible in gallery
@@ -122,7 +122,7 @@ export default function NewGalleryItemPage() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg flex items-center space-x-2 disabled:opacity-50 font-bold"
+            className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-lg flex items-center space-x-2 disabled:opacity-50 font-bold"
           >
             <Save className="w-5 h-5" />
             <span>{loading ? "Saving..." : "Save to Gallery"}</span>

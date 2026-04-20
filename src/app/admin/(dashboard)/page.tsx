@@ -37,7 +37,7 @@ export default async function AdminDashboard() {
   }, {} as Record<string, number>);
 
   const stats = [
-    { title: "Total News Posts", value: newsCount, icon: Newspaper, color: "text-blue-600", bg: "bg-blue-100" },
+    { title: "Total News Posts", value: newsCount, icon: Newspaper, color: "text-cyan-600", bg: "bg-cyan-100" },
     { title: "Upcoming Events", value: eventsCount, icon: Calendar, color: "text-orange-600", bg: "bg-orange-100" },
     { title: "Active Subscribers", value: subscribersCount, icon: Mail, color: "text-green-600", bg: "bg-green-100" },
     { title: "Total Volunteers", value: volunteersCount, icon: Users, color: "text-purple-600", bg: "bg-purple-100" },
