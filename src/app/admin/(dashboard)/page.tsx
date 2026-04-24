@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { Newspaper, Mail, Users, Calendar, DollarSign, BadgeCheck, ChevronRight } from "lucide-react";
+import { Newspaper, Mail, Users, Calendar, DollarSign, BadgeCheck, ChevronRight, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
@@ -10,6 +10,7 @@ export default async function AdminDashboard() {
     subscribersCount, 
     volunteersCount, 
     eventsCount,
+    commentsCount,
     totalDonationsResult,
     membershipsResult
   ] = await Promise.all([
@@ -17,6 +18,7 @@ export default async function AdminDashboard() {
     prisma.newsletter.count({ where: { isSubscribed: true } }),
     prisma.volunteer.count(),
     prisma.event.count(),
+    prisma.comment.count(),
     prisma.transaction.aggregate({
       _sum: { amount: true },
       where: { status: "Success" }
@@ -38,9 +40,9 @@ export default async function AdminDashboard() {
 
   const stats = [
     { title: "Total News Posts", value: newsCount, icon: Newspaper, color: "text-cyan-600", bg: "bg-cyan-100" },
+    { title: "Comments", value: commentsCount, icon: MessageSquare, color: "text-blue-600", bg: "bg-blue-100" },
     { title: "Upcoming Events", value: eventsCount, icon: Calendar, color: "text-orange-600", bg: "bg-orange-100" },
     { title: "Active Subscribers", value: subscribersCount, icon: Mail, color: "text-green-600", bg: "bg-green-100" },
-    { title: "Total Volunteers", value: volunteersCount, icon: Users, color: "text-purple-600", bg: "bg-purple-100" },
   ];
 
   return (

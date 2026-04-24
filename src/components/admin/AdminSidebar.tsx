@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Newspaper, Mail, LogOut, Calendar, Users, Image as ImageIcon, Shield } from "lucide-react";
+import { LayoutDashboard, Newspaper, Mail, LogOut, Calendar, Users, Image as ImageIcon, Shield, MessageSquare } from "lucide-react";
 import { signOut } from "next-auth/react";
 import clsx from "clsx";
 
 const navItems = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "News", href: "/admin/news", icon: Newspaper },
+  { name: "Comments", href: "/admin/comments", icon: MessageSquare },
   { name: "Events", href: "/admin/events", icon: Calendar },
   { name: "Gallery", href: "/admin/gallery", icon: ImageIcon },
   { name: "Memberships", href: "/admin/memberships", icon: Users },
