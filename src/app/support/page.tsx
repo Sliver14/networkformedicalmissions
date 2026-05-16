@@ -128,6 +128,10 @@ const SupportPage = () => {
                     className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
                   />
 
+                  <p className="text-[11px] text-gray-500 font-bold px-2 italic">
+                    * A temporal account will be created for you to synchronize your donation records. A temporal password will be sent to your email after successful payment.
+                  </p>
+
                   <button 
                     type="submit" 
                     disabled={loading}

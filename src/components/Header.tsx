@@ -87,6 +87,7 @@ const Header = () => {
       subLinks: [
         { name: "Associate Membership", href: "/membership/associate" },
         { name: "Individual Membership", href: "/membership/individual" },
+        { name: "Honorary Membership", href: "/membership" },
       ]
     },
     { name: "Volunteering", href: "/volunteers" },
