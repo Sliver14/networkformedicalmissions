@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Heart, MessageSquare, ArrowRight } from "lucide-react";
+import { Heart, MessageSquare, ArrowRight, Lock } from "lucide-react";
 import { likeNews, postComment, incrementViews } from "@/app/actions/news";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface Comment {
   id: number;
@@ -18,6 +20,7 @@ interface NewsDetailClientProps {
 }
 
 const NewsDetailClient = ({ newsId, initialLikes, comments }: NewsDetailClientProps) => {
+  const { data: session } = useSession();
   const [likes, setLikes] = useState(initialLikes);
   const [hasLiked, setHasLiked] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
@@ -44,6 +47,8 @@ const NewsDetailClient = ({ newsId, initialLikes, comments }: NewsDetailClientPr
 
   const handleComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!session) return;
+    
     setIsSubmitting(true);
     setMessage(null);
     
@@ -96,47 +101,50 @@ const NewsDetailClient = ({ newsId, initialLikes, comments }: NewsDetailClientPr
         </div>
       </div>
 
-      {/* Comment Form */}
-      <div className="bg-white rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl shadow-gray-200 border border-gray-100">
-        <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-6 md:mb-8">Leave a Comment</h3>
-        {message && (
-          <div className={`p-4 rounded-xl mb-8 font-bold ${message.type === "success" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"}`}>
-            {message.text}
-          </div>
-        )}
-        <form onSubmit={handleComment} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input 
-              name="name"
-              type="text" 
-              placeholder="Your Name" 
+      {/* Comment Form / Login Prompt */}
+      {session ? (
+        <div className="bg-white rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl shadow-gray-200 border border-gray-100">
+          <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-6 md:mb-8">Leave a Comment</h3>
+          {message && (
+            <div className={`p-4 rounded-xl mb-8 font-bold ${message.type === "success" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"}`}>
+              {message.text}
+            </div>
+          )}
+          <form onSubmit={handleComment} className="space-y-6">
+            <p className="text-sm text-gray-500 font-bold">Posting as <span className="text-cyan-500">{session.user?.name || session.user?.email}</span></p>
+            <textarea 
+              name="content"
+              placeholder="Write a Comment" 
               required 
-              className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-            />
-            <input 
-              name="email"
-              type="email" 
-              placeholder="Email Address" 
-              required 
-              className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all"
-            />
+              rows={5}
+              className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all resize-none"
+            ></textarea>
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full bg-cyan-500 text-white py-5 rounded-xl font-black hover:bg-cyan-600 transition-all flex items-center justify-center shadow-xl shadow-cyan-100"
+            >
+              {isSubmitting ? "Posting..." : <><ArrowRight className="mr-2" size={20} /> Submit Comment</>}
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div className="bg-gray-50 rounded-3xl p-10 md:p-16 text-center border-2 border-dashed border-gray-200 space-y-6">
+          <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg text-cyan-500">
+            <Lock size={32} />
           </div>
-          <textarea 
-            name="content"
-            placeholder="Write a Comment" 
-            required 
-            rows={5}
-            className="w-full bg-gray-50 border border-gray-200 py-4 px-6 rounded-xl focus:ring-2 focus:ring-cyan-500 outline-none transition-all resize-none"
-          ></textarea>
-          <button 
-            type="submit" 
-            disabled={isSubmitting}
-            className="w-full bg-cyan-500 text-white py-5 rounded-xl font-black hover:bg-cyan-600 transition-all flex items-center justify-center shadow-xl shadow-cyan-100"
+          <div className="space-y-2">
+            <h3 className="text-2xl font-black text-gray-900">Want to join the conversation?</h3>
+            <p className="text-gray-600 max-w-md mx-auto">Please login to your account to post a comment and share your thoughts with the community.</p>
+          </div>
+          <Link 
+            href="/login" 
+            className="inline-flex items-center gap-2 bg-cyan-500 text-white px-10 py-4 rounded-xl font-black hover:bg-cyan-600 transition-all shadow-xl shadow-cyan-100"
           >
-            {isSubmitting ? "Posting..." : <><ArrowRight className="mr-2" size={20} /> Submit Comment</>}
-          </button>
-        </form>
-      </div>
+            Login to Comment <ArrowRight size={20} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

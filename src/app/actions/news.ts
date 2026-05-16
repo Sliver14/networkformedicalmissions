@@ -3,6 +3,8 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export async function likeNews(newsId: number) {
   try {
@@ -38,9 +40,15 @@ export async function likeNews(newsId: number) {
 
 export async function postComment(newsId: number, formData: FormData) {
   try {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+      return { success: false, message: "You must be logged in to comment." };
+    }
+
     const content = formData.get("content") as string;
+    const name = session.user.name || "User";
+    const email = session.user.email || "";
 
     const newsItem = await prisma.news.findUnique({
       where: { id: newsId },

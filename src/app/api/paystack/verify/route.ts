@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -55,11 +56,29 @@ export async function GET(request: Request) {
         return NextResponse.redirect(new URL('/membership/success', request.url));
       } else if (metadata.type === 'donation') {
         // Check if user exists
-        const user = await prisma.user.findUnique({ where: { email } });
+        let user = await prisma.user.findUnique({ where: { email } });
+
+        // If user doesn't exist, create a temporal account
+        if (!user) {
+          const temporalPassword = Math.random().toString(36).slice(-8);
+          const hashedPassword = await bcrypt.hash(temporalPassword, 10);
+          
+          user = await prisma.user.create({
+            data: {
+              email,
+              name: metadata.name || 'Guest Donor',
+              password: hashedPassword,
+              role: 'USER',
+            }
+          });
+
+          // TODO: Send email with temporalPassword to the user
+          console.log(`Temporal account created for ${email} with password: ${temporalPassword}`);
+        }
 
         await prisma.transaction.create({
           data: {
-            userId: user?.id ?? undefined,
+            userId: user.id,
             guestEmail: email,
             reference,
             amount,
