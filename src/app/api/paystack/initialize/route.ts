@@ -7,61 +7,65 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { email, amount, metadata } = body;
 
-    // Check if password exists in metadata
-    if (!metadata.password) {
-      return NextResponse.json({ error: 'Password is required' }, { status: 400 });
-    }
+    let finalMetadata = { ...metadata };
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(metadata.password, 10);
+    // Handle Membership Registration (Requires password and pre-emptive user/membership creation)
+    if (metadata.type?.startsWith('membership')) {
+      if (!metadata.password) {
+        return NextResponse.json({ error: 'Password is required' }, { status: 400 });
+      }
 
-    // Create or update user
-    const user = await prisma.user.upsert({
-      where: { email },
-      update: {
-        name: metadata.name,
-        title: metadata.title,
-        gender: metadata.gender,
-        phone: metadata.phone,
-        password: hashedPassword,
-        profession: metadata.profession,
-        qualification: metadata.qualification,
-        country: metadata.country,
-        state: metadata.state,
-        city: metadata.city,
-      },
-      create: {
-        email,
-        name: metadata.name,
-        title: metadata.title,
-        gender: metadata.gender,
-        phone: metadata.phone,
-        password: hashedPassword,
-        role: 'USER',
-        profession: metadata.profession,
-        qualification: metadata.qualification,
-        country: metadata.country,
-        state: metadata.state,
-        city: metadata.city,
-      },
-    });
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(metadata.password, 10);
 
-    // Create a pending membership
-    const membership = await prisma.membership.create({
-      data: {
+      // Create or update user
+      const user = await prisma.user.upsert({
+        where: { email },
+        update: {
+          name: metadata.name,
+          title: metadata.title,
+          gender: metadata.gender,
+          phone: metadata.phone,
+          password: hashedPassword,
+          profession: metadata.profession,
+          qualification: metadata.qualification,
+          country: metadata.country,
+          state: metadata.state,
+          city: metadata.city,
+        },
+        create: {
+          email,
+          name: metadata.name,
+          title: metadata.title,
+          gender: metadata.gender,
+          phone: metadata.phone,
+          password: hashedPassword,
+          role: 'USER',
+          profession: metadata.profession,
+          qualification: metadata.qualification,
+          country: metadata.country,
+          state: metadata.state,
+          city: metadata.city,
+        },
+      });
+
+      // Create a pending membership
+      const membership = await prisma.membership.create({
+        data: {
+          userId: user.id,
+          type: metadata.type,
+          status: 'Pending',
+        },
+      });
+
+      // Clean up metadata to avoid sending sensitive info to Paystack
+      const { password, ...safeMetadata } = metadata;
+      finalMetadata = {
+        ...safeMetadata,
         userId: user.id,
-        type: metadata.type,
-        status: 'Pending',
-      },
-    });
-
-    // Clean up metadata to avoid sending sensitive info to Paystack
-    const { password, ...safeMetadata } = metadata;
-    const finalMetadata = {
-      ...safeMetadata,
-      userId: user.id,
-      membershipId: membership.id,
-    };
+        membershipId: membership.id,
+      };
+    }
 
     const response = await fetch('https://api.paystack.co/transaction/initialize', {
       method: 'POST',
